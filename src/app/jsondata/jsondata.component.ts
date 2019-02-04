@@ -8,13 +8,22 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./jsondata.component.css']
 })
 export class JsondataComponent implements OnInit {
-  heading:String;
-  jsonData:any;
+  user: any;
+ 
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.heading = "Test Angular App"
-    
+    this.showUserData();
   }
+
+
+  getUserData(){
+    return this.http.get('/api/json');
+  }
+
+  showUserData(){
+    this.getUserData()
+      .subscribe((data: any) => this.user = data.user);
+  }  
 
 }
